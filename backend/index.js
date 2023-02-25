@@ -44,7 +44,11 @@ app.get('/todos/:id', (req, res) => {
 })
 
 app.delete('/todos'), (req, res) => {
-    let idx = TODOS.findIndex(itm => {r})
+    let idx = TODOS.findIndex(itm => itm.id == req.params.id)
+    if(idx <0){
+        return
+    }
+    TODOS.delete(idx)
 }
 
 app.put('/todos')
