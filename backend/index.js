@@ -37,8 +37,11 @@ app.get('/', (req, res) => {
 app.get('/todos', (req, res) => {
     res.send(JSON.stringify(TODOS))
 })
-
-
+//:id
+app.get('/todos/:id', (req, res) => {
+    let itm = TODOS.find(item => {return item.id == req.params.id})
+    res.send(JSON.stringify(itm))
+})
 app.put('/todos')
 
   app.listen(port, () => {
