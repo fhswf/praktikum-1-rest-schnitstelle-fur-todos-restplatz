@@ -2,7 +2,7 @@ import express from 'express';
 
 /** Zentrales Objekt für unsere Express-Applikation */
 const app = express();
-
+const port = 3000;
 /**
  * Liste aller ToDos. 
  * Wird später durch Datenbank ersetzt!
@@ -22,4 +22,19 @@ let TODOS = [
     },
 ];
 
-// Your code here
+// GET
+
+app.get('/todos/', (req,res) => {
+    res.send(TODOS);
+})
+
+app.get('/todos/:id', (req,res) => {
+    const id = req.params.id;
+    res.send(TODOS[id]);
+    console.log(`Zeige TODOS mit der ID ${id} an`)
+})
+
+// Listener
+app.listen(port, () => {
+    console.log(`TODO App lauscht auf Port ${port}`)
+  })
