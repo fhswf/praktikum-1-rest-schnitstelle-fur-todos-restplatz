@@ -35,15 +35,21 @@ app.get('/', (req, res) => {
 
 
 app.get('/todos', (req, res) => {
-    res.send(JSON.stringify(TODOS))
+    res.send(TODOS)
 })
-//:id
+
 app.get('/todos/:id', (req, res) => {
     let itm = TODOS.find(item => {return item.id == req.params.id})
-    res.send(JSON.stringify(itm))
+    res.send(itm)
 })
-app.put('/todos')
 
+app.delete('/todos'), (req, res) => {
+    let idx = TODOS.findIndex(itm => {r})
+}
+
+app.put('/todos')
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 })
+
+
