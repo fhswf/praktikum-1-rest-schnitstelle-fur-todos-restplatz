@@ -23,3 +23,72 @@ let TODOS = [
 ];
 
 // Your code here
+
+const port = 3000
+
+//Read aller ToDos
+
+app.get('/todos', (req, res) => {
+  res.send(TODOS)
+})
+
+//Create zum Anlegen eines ToDos
+
+app.post('/todos', (req, res) => {
+    const todo = req.body;
+    console.log(todo);
+    // Generiere eine neue ID für das ToDo
+    const newId = Date.now();
+    // Erstelle ein neues ToDo-Objekt mit der neuen ID
+    const newTodo = {
+          id: newId,
+          title: todo.title,
+          due: todo.due,
+          status: todo.status
+      };
+      // Füge das neue ToDo dem Array TODOS hinzu
+      TODOS.push(newTodo);
+  res.status(201).send("ToDo wurde erfolgreich angelegt.");
+});
+
+
+//Read eines einzelnen ToDos
+
+app.get('/todos/:id', (req,res) => {
+    
+    const idi = parseInt(req.params.id);
+    console.log(idi)
+    let todo = TODOS.find(todo => todo.id === idi);   
+    res.send(todo);
+});
+
+
+//Update eines ToDos
+
+app.put('/todos/:id', (req, res) => { 
+    const idi = parseInt(req.params.id);
+    console.log(idi)
+    let todo = TODOS.find(todo => todo.id === idi);
+    todo.title = req.body.title;
+    todo.due = req.body.due;
+    todo.status = req.body.status;
+    res.status(200).send("ToDo wurde erfolgreich geändert.");
+});
+
+
+
+//Delete eines ToDos
+
+app.delete('/todos/:id', (req, res) => {
+    const idi = parseInt(req.params.id);
+    console.log(idi)
+    let todo = TODOS.find(todo => todo.id === idi);
+    TODOS = TODOS.filter(todo => todo.id !== idi);
+    res.status(200).send("ToDo wurde erfolgreich gelöscht.");
+});
+
+// Starte den Server
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})

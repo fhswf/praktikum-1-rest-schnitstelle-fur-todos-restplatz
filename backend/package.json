@@ -1,5 +1,5 @@
 {
-  "name": "todo-backend",
+  "name": "express",
   "version": "1.0.0",
   "description": "Backend für ToDo-Anwendung",
   "main": "index.js",
