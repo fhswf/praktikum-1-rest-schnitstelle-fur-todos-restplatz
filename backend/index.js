@@ -1,5 +1,10 @@
 import express from 'express';
 
+
+import { fileURLToPath } from 'url';
+import path from 'path';
+
+
 /** Zentrales Objekt für unsere Express-Applikation */
 const app = express();
 
@@ -31,6 +36,17 @@ const port = 3000
 app.get('/todos', (req, res) => {
   res.send(TODOS)
 })
+
+// Connect to frontend
+
+app.get('/', (req, res) => {
+  const filePath = path.join(__dirname, '../frontend/todo.html');
+  res.sendFile(filePath);
+});
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 //Create zum Anlegen eines ToDos
 
