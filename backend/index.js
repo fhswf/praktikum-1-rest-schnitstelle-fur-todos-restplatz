@@ -4,6 +4,9 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import path from 'path';
 
+import bodyParser from 'body-parser';
+
+
 
 /** Zentrales Objekt für unsere Express-Applikation */
 const app = express();
@@ -50,21 +53,28 @@ const __dirname = path.dirname(__filename);
 
 //Create zum Anlegen eines ToDos
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.post('/todos', (req, res) => {
     const todo = req.body;
     console.log(todo);
-    // Generiere eine neue ID für das ToDo
+ 
+    //Generiere eine neue ID für das ToDo
     const newId = Date.now();
-    // Erstelle ein neues ToDo-Objekt mit der neuen ID
+    //Erstelle ein neues ToDo-Objekt mit der neuen ID
     const newTodo = {
           id: newId,
           title: todo.title,
           due: todo.due,
           status: todo.status
       };
-      // Füge das neue ToDo dem Array TODOS hinzu
+      //Füge das neue ToDo dem Array TODOS hinzu
       TODOS.push(newTodo);
   res.status(201).send("ToDo wurde erfolgreich angelegt.");
+
+  console.log(TODOS)
+
 });
 
 
