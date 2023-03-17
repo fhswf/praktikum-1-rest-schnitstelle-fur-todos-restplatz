@@ -2,6 +2,8 @@ import express from 'express';
 
 /** Zentrales Objekt für unsere Express-Applikation */
 const app = express();
+const port = 3000
+
 
 /**
  * Liste aller ToDos. 
@@ -22,4 +24,36 @@ let TODOS = [
     },
 ];
 
+
+
+
+
 // Your code here
+app.get('/', (req, res) => {
+    res.send('nix los')
+  })
+
+
+app.get('/todos', (req, res) => {
+    res.send(TODOS)
+})
+
+app.get('/todos/:id', (req, res) => {
+    let itm = TODOS.find(item => {return item.id == req.params.id})
+    res.send(itm)
+})
+
+app.delete('/todos'), (req, res) => {
+    let idx = TODOS.findIndex(itm => itm.id == req.params.id)
+    if(idx <0){
+        return
+    }
+    TODOS.delete(idx)
+}
+
+app.put('/todos')
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})
+
+
